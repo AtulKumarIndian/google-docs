@@ -17,7 +17,7 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 
-const io = require("socket.io")(4000, {
+const io = require("socket.io")(process.env.PORT1 || 4000, {
   cors: {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"],
