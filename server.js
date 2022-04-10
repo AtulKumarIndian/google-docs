@@ -49,7 +49,7 @@ async function findOrCreateDocument(id) {
   if (document) return document
   return await Document.create({ _id: id, data: defaultValue })
 }
-const port = 6000
+const port = process.env.PORT || 6000
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
