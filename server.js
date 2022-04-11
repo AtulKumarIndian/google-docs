@@ -12,7 +12,7 @@ require('dotenv').config()
 
 const io = require("socket.io")(process.env.PORT || 8000, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://protected-cliffs-11179.herokuapp.com",
     methods: ["GET", "POST"],
   },
 })
