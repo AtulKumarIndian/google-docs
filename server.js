@@ -1,8 +1,6 @@
 const mongoose = require("mongoose")
 const Document = require("./Document")
 require('dotenv').config()
-// "mongodb+srv://Atulkumargupta:Atul12345@cluster0.w34ny.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-// mongoose.connect("mongodb://localhost/google-docs-clone", {
 
   mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.w34ny.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, { 
   useNewUrlParser: true,
@@ -11,13 +9,8 @@ require('dotenv').config()
   useCreateIndex: true,
 })
 
-const express = require("express");
-const app = express();
-const path = require('path');
-app.use(express.static(path.join(__dirname, 'client/build')));
 
-
-const io = require("socket.io")(process.env.PORT1 || 4000, {
+const io = require("socket.io")(process.env.PORT || 8000, {
   cors: {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"],
@@ -49,12 +42,4 @@ async function findOrCreateDocument(id) {
   if (document) return document
   return await Document.create({ _id: id, data: defaultValue })
 }
-const port = process.env.PORT || 6000
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
 
-
-app.listen(port, () => {
-  console.log("Server running at port : " + port);
-});
